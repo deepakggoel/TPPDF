@@ -192,7 +192,7 @@ internal enum PDFCalculations {
         let pageLayout = generator.document.layout
         let headerHeight = layout.heights.maxHeaderHeight()
 
-        return layout.margin.top
+        return (!generator.document.firstPageHasTopMargin && generator.currentPage == 1 ? 0 : layout.margin.top)
             + headerHeight
             + (headerHeight > 0 ? pageLayout.space.header : 0)
             + generator.currentPadding.top

@@ -22,6 +22,8 @@ public class PDFDocument: CustomStringConvertible {
      Holds all layout information
      */
     public var layout: PDFPageLayout
+    
+    public var firstPageHasTopMargin: Bool = true
 
     /**
      Holds all document information
