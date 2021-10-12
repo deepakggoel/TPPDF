@@ -37,6 +37,8 @@ public class PDFGenerator: PDFGeneratorProtocol, CustomStringConvertible {
      Current page which increments during preparation
      */
     internal var currentPage: Int = 1
+    
+    internal var topOffset: CGFloat = 0
 
     /**
      Total page count used for displaying in rendered PDF

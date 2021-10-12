@@ -139,6 +139,10 @@ extension PDFGenerator {
 
         var hasAddedHeaderFooterToPage = false
 
+        if !document.firstPageHasTopMargin {
+            topOffset = -document.layout.margin.top
+        }
+        
         // Iterate all objects and let them calculate the required rendering bounds
         var needsPageBreak = false
         for (pdfObjectIdx, locatedPdfObject) in contentObjects.enumerated() {
@@ -197,6 +201,10 @@ extension PDFGenerator {
             return []
         }
 
+        if !document.firstPageHasTopMargin {
+            topOffset = -document.layout.margin.top
+        }
+        
         var result = [PDFLocatedRenderObject]()
 
         var hasAddedMasterToPage = false
