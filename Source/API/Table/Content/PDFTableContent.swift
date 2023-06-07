@@ -103,8 +103,8 @@ public class PDFTableContent: CustomStringConvertible, Hashable {
     /**
      TODO: Documentation
      */
-    internal var imageValue: Image? {
-        type == .image ? content as? Image : nil
+    internal var imageValue: PDFImage? {
+        type == .image ? content as? PDFImage : nil
     }
 
     // MARK: - Equatable

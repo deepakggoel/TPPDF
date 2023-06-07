@@ -38,8 +38,6 @@ public class PDFGenerator: PDFGeneratorProtocol, CustomStringConvertible {
      */
     internal var currentPage: Int = 1
     
-    internal var topOffset: CGFloat = 0
-
     /**
      Total page count used for displaying in rendered PDF
      */

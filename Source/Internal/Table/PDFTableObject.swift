@@ -39,10 +39,16 @@ internal class PDFTableObject: PDFRenderObject {
         try PDFTableValidator.validateTable(table: table)
 
         // Calculate available size on current page
-        let availableSize = PDFCalculations.calculateAvailableFrame(for: generator, in: container)
+        var availableSize = PDFCalculations.calculateAvailableFrame(for: generator, in: container)
+        if table.topOffset != 0 {
+            availableSize.height -= table.topOffset
+        }
 
         // Calculate position on page
-        let tableOrigin = PDFCalculations.calculateElementPosition(for: generator, in: container, with: availableSize)
+        var tableOrigin = PDFCalculations.calculateElementPosition(for: generator, in: container, with: availableSize)
+        if table.topOffset != 0 {
+            tableOrigin.y += table.topOffset
+        }
 
         // Merge table cells
         let mergeNodes = PDFTableMergeUtil.calculateMerged(table: table)
@@ -198,7 +204,7 @@ internal class PDFTableObject: PDFRenderObject {
                 .calculateCellFrame(generator: generator,
                                     origin: contentOrigin,
                                     width: contentWidth,
-                                    image: image)
+                                    image: image.image)
         }
         return CGRect.zero
     }
@@ -484,7 +490,7 @@ internal class PDFTableObject: PDFRenderObject {
             sliceObject.frame.size.height -= sliceObject.frame.maxY - maxOffset
             sliceObject.frame.size.height = min(sliceObject.frame.size.height, maxOffset - minOffset)
         }
-        if frame.minY < minOffset {
+        if frame.minY < minOffset + table.topOffset {
             sliceObject.frame.origin.y += minOffset - sliceObject.frame.origin.y
             sliceObject.frame.size.height -= minOffset - sliceObject.frame.origin.y
         }
@@ -514,7 +520,7 @@ internal class PDFTableObject: PDFRenderObject {
         var contentObject: PDFRenderObject?
 
         if let contentImage = content.imageValue {
-            contentObject = PDFImageObject(image: PDFImage(image: contentImage, options: [.none]))
+            contentObject = PDFImageObject(image: contentImage)
         } else {
             var attributedString: NSAttributedString?
             if let contentText = content.stringValue {

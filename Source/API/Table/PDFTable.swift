@@ -51,6 +51,8 @@ public class PDFTable: PDFDocumentObject {
      Cells should split when overlapping page
      */
     public var shouldSplitCellsOnPageBreak = false
+    
+    public var topOffset: CGFloat = 0
 
     /**
      Count of rows and columns in this table
@@ -87,6 +89,7 @@ public class PDFTable: PDFDocumentObject {
         table.padding = self.padding
         table.margin = self.margin
         table.showHeadersOnEveryPage = self.showHeadersOnEveryPage
+        table.topOffset = topOffset
         return table
     }
 

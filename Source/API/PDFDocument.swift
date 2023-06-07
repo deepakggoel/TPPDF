@@ -23,8 +23,6 @@ public class PDFDocument: CustomStringConvertible {
      */
     public var layout: PDFPageLayout
     
-    public var firstPageHasTopMargin: Bool = true
-
     /**
      Holds all document information
      */

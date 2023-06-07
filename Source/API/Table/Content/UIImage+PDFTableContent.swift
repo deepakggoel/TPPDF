@@ -20,6 +20,15 @@ extension Image: PDFTableContentable {
      - returns: Instance of `PDFTableContent` of type image, using self as content
      */
     public var asTableContent: PDFTableContent {
+        PDFTableContent(type: .image, content: PDFImage(image: self, options: [.none]))
+    }
+}
+
+extension PDFImage: PDFTableContentable {
+    /**
+     - returns: Instance of `PDFTableContent` of type image, using self as content
+     */
+    public var asTableContent: PDFTableContent {
         PDFTableContent(type: .image, content: self)
     }
 }

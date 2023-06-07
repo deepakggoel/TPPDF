@@ -34,9 +34,6 @@ internal class PDFPageBreakObject: PDFRenderObject {
      - returns: Self
      */
     override internal func calculate(generator: PDFGenerator, container: PDFContainer) throws -> [PDFLocatedRenderObject] {
-        if generator.currentPage == 1 && !generator.document.firstPageHasTopMargin {
-            generator.topOffset = 0
-        }
         generator.layout.heights.content = generator.columnState.getWrapColumnsHeight(for: container)
 
         stayOnSamePage = false
